@@ -3,14 +3,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
-
-/*
- * Holds any data
- */
-typedef struct {
-    void *value;
-    size_t size;
-} data_packet;
+#include "types.h"
 
 /*
  * Doubly linked list node
