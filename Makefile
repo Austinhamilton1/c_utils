@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Iinclude -Wall -g
-LDFLAGS = -Llibs -lutils
+LDFLAGS = -Llibs -llist
 
 all: liblist.a main clean
 
