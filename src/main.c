@@ -1,4 +1,5 @@
 #include "list.h"
+#include "stack.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,12 +44,8 @@ void print_list(list *list) {
 int main(int argc, char *argv[]) {
     list *new_list = list_init();
 
-    for(int i = 0; i < 4; i++) {
-        int *data = (int *)malloc(sizeof(i));
-        memcpy(data, &i, sizeof(i));
-        list_prepend(new_list, data, sizeof(i));
-        free(data);
-    }
+    for(int i = 0; i < 4; i++) 
+        list_prepend(new_list, &i, sizeof(i));
 
     print_list(new_list);
 
@@ -69,4 +66,34 @@ int main(int argc, char *argv[]) {
     list_free(sorted_list);
     list_free(squared_list);
     list_free(even_list);
+
+	stack *new_stack = stack_init(4);
+
+	for(int i = 0; i < 16; i++)
+		stack_push(new_stack, &i, sizeof(i));
+	
+	int current;
+	while(new_stack->size > 0) {
+		stack_pop(new_stack, &current);
+		printf("%d\n", current);
+	}
+
+	char buf[7] = {'A', 'u', 's', 't', 'i', 'n', 0};
+	for(char *ptr = buf; *ptr != 0; ptr++) 
+		stack_push(new_stack, ptr, sizeof(char));
+
+	char current_char;
+	
+	stack_peek(new_stack, &current_char);
+	printf("Top of stack: ");
+	putchar(current_char);
+
+	printf("Reversed string: ");
+	while(new_stack->size > 0) {
+		stack_pop(new_stack, &current_char);
+		putchar(current_char);
+	}
+	printf("\n");
+
+	stack_free(new_stack);
 }
